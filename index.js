@@ -66,26 +66,26 @@ getFloor = (customProjects) => {
     let requests = [];
 
     // If user specifies a project, return the specific stats
-    if (customProjects !== undefined && customProjects.length > 0) {
-        requests.push([customProjects, `${requestBase}/${customProjects}/stats`]);
-    } else if (customProjects == bayc)
+    if (customProjects == "bayc")
         {
         // if user enters code for specific line
         baycProjects.forEach((projects) => {
             requests.push([projects, `${requestBase}/${projects}/stats`]);
         })
-    } else if (customProjects == azuki)
+    } else if (customProjects == "azuki")
     {
     // if user enters code for specific line
     azukiProjects.forEach((projects) => {
         requests.push([projects, `${requestBase}/${projects}/stats`]);
     })
-    } else if (customProjects == meta)
+    } else if (customProjects == "meta")
     {
     // if user enters code for specific line
     metaProjects.forEach((projects) => {
         requests.push([projects, `${requestBase}/${projects}/stats`]);
     })
+    } else if (customProjects !== undefined && customProjects.length > 0) {
+        requests.push([customProjects, `${requestBase}/${customProjects}/stats`]);
     } else {
         // If user not specifies a project, return the stored projects stats
         nftProjects.forEach((projects) => {
@@ -107,7 +107,7 @@ sendMessages = (request, message) => {
             if(floorPrice !== null){
                 message.channel.send(`⩺ ${result.data.collection.name}: ${floorPrice} Ξ`);
             }else{
-                message.channel.send(`${result.data.collection.name} No sales on OpenSea. Can't calculate floor.`);
+                message.channel.send(`${result.data.collection.name} Try again. Collection name must match the opensea slug or use "!floor" for top collections.`);
             }
         })
     }).catch(function (error) {
