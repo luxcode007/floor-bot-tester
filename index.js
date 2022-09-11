@@ -19,6 +19,8 @@ let nftProjects = process.env.NFT_PROJECT_LIST.split(",");
 let baycProjects = process.env.BAYC_LIST.split(",");
 let azukiProjects = process.env.AZUKI_LIST.split(",");
 let metaProjects = process.env.META_LIST.split(",");
+let kongzProjects = process.env.KONGZ_LIST.split(",");
+let digiProjects = process.env.DIGI_LIST.split(",");
 // removed from .env file and stored here in case needed:
 
 
@@ -82,6 +84,18 @@ getFloor = (customProjects) => {
     {
     // if user enters code for specific line
     metaProjects.forEach((projects) => {
+        requests.push([projects, `${requestBase}/${projects}/stats`]);
+    })
+    } else if (customProjects == "kongz")
+    {
+    // if user enters code for specific line
+    kongzProjects.forEach((projects) => {
+        requests.push([projects, `${requestBase}/${projects}/stats`]);
+    })
+    } else if (customProjects == "digi")
+    {
+    // if user enters code for specific line
+    digiProjects.forEach((projects) => {
         requests.push([projects, `${requestBase}/${projects}/stats`]);
     })
     } else if (customProjects !== undefined && customProjects.length > 0) {
